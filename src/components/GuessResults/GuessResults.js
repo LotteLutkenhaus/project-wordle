@@ -4,9 +4,9 @@ function GuessResults({ guessResults }) {
   return (
     <>
       <div className="guess-results">
-        {guessResults.map(({ id, result }) => (
+        {guessResults.map(({ id, value }) => (
           <p className="guess" key={id}>
-            {result}
+            {value}
           </p>
         ))}
       </div>
