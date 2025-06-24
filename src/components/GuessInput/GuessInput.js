@@ -6,13 +6,6 @@ function GuessInput() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    // Additional check as minLength and maxLength HTML validation doesn't
-    // actually work. `pattern` works as a substitute, but it requires regex
-    // which isn't too readable and the error message can't be customized.
-    if (guess.length !== 5) {
-      window.alert("Please make sure your guess has exactly 5 letters 🫶");
-    }
-
     console.log({ guess });
     setGuess("");
   }
@@ -23,11 +16,11 @@ function GuessInput() {
         <label htmlFor="guess-input">Enter guess:</label>
         <input
           required
-          minLength={5}
-          maxLength={5}
           id="guess-input"
           value={guess}
           type="text"
+          pattern="[a-zA-Z]{5}"
+          title="5 letter word"
           onChange={(event) => {
             const nextGuess = event.target.value.toUpperCase();
             setGuess(nextGuess);
