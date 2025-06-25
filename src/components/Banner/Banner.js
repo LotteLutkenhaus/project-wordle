@@ -1,19 +1,6 @@
 import React from "react";
-import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
-function Banner({ guessResults, answer }) {
-  let gameStatus = "running";
-
-  if (guessResults.length > 0) {
-    const lastGuess = guessResults[guessResults.length - 1];
-
-    if (lastGuess.value === answer) {
-      gameStatus = "won";
-    } else if (guessResults.length >= NUM_OF_GUESSES_ALLOWED) {
-      gameStatus = "lost";
-    }
-  }
-
+function Banner({ guessResults, answer, gameStatus }) {
   let className;
   let bannerContent = null;
 
@@ -22,7 +9,9 @@ function Banner({ guessResults, answer }) {
     bannerContent = (
       <>
         <strong>Congratulations!</strong> Got it in{" "}
-        <strong>{guessResults.length} guesses</strong>
+        <strong>
+          {guessResults.length} guess{guessResults.length > 1 ? "es" : ""}
+        </strong>
       </>
     );
   }
