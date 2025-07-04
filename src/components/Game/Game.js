@@ -14,6 +14,7 @@ console.info({ answer });
 
 function Game() {
   const [guessResults, setGuessResults] = React.useState([]);
+  const [gameStatus, setGameStatus] = React.useState("running");
 
   function handleSubmitGuess(guess) {
     const newGuessResults = [
@@ -21,17 +22,15 @@ function Game() {
       { value: guess, id: crypto.randomUUID() },
     ];
     setGuessResults(newGuessResults);
-  }
 
-  let gameStatus = "running";
+    if (guess === answer) {
+      setGameStatus("won");
+      return;
+    }
 
-  if (guessResults.length > 0) {
-    const lastGuess = guessResults[guessResults.length - 1];
-
-    if (lastGuess.value === answer) {
-      gameStatus = "won";
-    } else if (guessResults.length >= NUM_OF_GUESSES_ALLOWED) {
-      gameStatus = "lost";
+    if (newGuessResults.length >= NUM_OF_GUESSES_ALLOWED) {
+      setGameStatus("lost");
+      return;
     }
   }
 
